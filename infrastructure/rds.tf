@@ -42,4 +42,8 @@ resource "aws_route_table" "public_route_table" {
     gateway_id = aws_internet_gateway.fmcg_igw.id
   }
 
+  tags = {
+    Name = "public_route_table"
+  }
+}
 
