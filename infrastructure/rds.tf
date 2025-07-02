@@ -22,3 +22,14 @@ resource "aws_subnet" "public_subnet" {
     Environment = "Production"
   }
 }
+
+
+# Create Internet Gateway for public access
+resource "aws_internet_gateway" "rds_igw" {
+  vpc_id = aws_vpc.rds_vpc.id
+
+  tags = {
+    Name = "rds_igw"
+  }
+}
+
