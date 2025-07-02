@@ -56,3 +56,8 @@ resource "aws_route_table_association" "public_subnet_association" {
 resource "aws_db_subnet_group" "default" {
   name       = "db_subnet_group"
   subnet_ids = [aws_subnet.public_subnet.id]
+
+  tags = {
+    Name = "subnet_group"
+  }
+}
