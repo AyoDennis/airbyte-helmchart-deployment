@@ -42,6 +42,7 @@ resource "aws_iam_policy" "airbyte_policy" {
         ]
         Resource = [
           "arn:aws:s3:::airbyte-destination-demo*",
+          "*"
         ]
       },
     ]

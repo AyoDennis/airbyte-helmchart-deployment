@@ -35,7 +35,7 @@ resource "aws_internet_gateway" "rds_igw" {
 
 # Route Table for public subnet
 resource "aws_route_table" "public_route_table" {
-  vpc_id = aws_vpc.fmcg_vpc.id
+  vpc_id = aws_vpc.rds_vpc.id
 
   route {
     cidr_block = "0.0.0.0/0"
