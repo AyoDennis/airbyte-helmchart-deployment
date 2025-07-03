@@ -16,3 +16,9 @@ resource "aws_ssm_parameter" "airbyte_access_key" {
   type  = "String"
   value = aws_iam_access_key.airbyte_credentials.id
 }
+
+resource "aws_ssm_parameter" "airbyte_secret_key" {
+  name  = "/dev/airbyte/airbyte_user_secret_key"
+  type  = "String"
+  value = aws_iam_access_key.airbyte_credentials.secret
+}
