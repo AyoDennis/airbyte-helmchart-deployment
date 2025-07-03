@@ -22,3 +22,24 @@ resource "aws_ssm_parameter" "airbyte_secret_key" {
   type  = "String"
   value = aws_iam_access_key.airbyte_credentials.secret
 }
+
+resource "aws_iam_policy" "airbyte_policy" {
+  name        = "airbyte-policy"
+  description = "Dedicated policy for rds instance and s3 "
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow",
+        Action = [
+          "s3:ListBucket",
+          "s3:*Object*",
+        ]
+        Resource = [
+          "arn:aws:s3:::airbyte-destination-demo*",
+        ]
+      },
+    ]
+  })
+}
