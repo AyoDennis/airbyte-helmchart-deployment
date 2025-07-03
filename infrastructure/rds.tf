@@ -23,6 +23,19 @@ resource "aws_subnet" "public_subnet" {
   }
 }
 
+# Create private subnet
+resource "aws_subnet" "public_subnet" {
+  vpc_id                  = aws_vpc.rds_vpc.id
+  cidr_block              = "10.0.2.0/24"
+  availability_zone       = "eu-central-1b"
+  map_public_ip_on_launch = true
+
+  tags = {
+    Name = "private_subnet"
+    Environment = "Production"
+  }
+}
+
 
 # Create Internet Gateway for public access
 resource "aws_internet_gateway" "rds_igw" {
