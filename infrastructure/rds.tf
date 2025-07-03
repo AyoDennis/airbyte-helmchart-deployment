@@ -53,7 +53,7 @@ resource "aws_route_table_association" "public_subnet_association" {
   route_table_id = aws_route_table.public_route_table.id
 }
 
-resource "aws_db_subnet_group" "default" {
+resource "aws_db_subnet_group" "db_subnet_group" {
   name       = "db_subnet_group"
   subnet_ids = [aws_subnet.public_subnet.id]
 
