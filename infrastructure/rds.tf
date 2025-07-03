@@ -5,7 +5,7 @@ resource "aws_vpc" "rds_vpc" {
   enable_dns_hostnames = true
 
   tags = {
-    Name        = "rds_vpc"
+    Name = "rds_vpc"
     Environment = "Production"
   }
 }
@@ -18,7 +18,7 @@ resource "aws_subnet" "public_subnet" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name        = "public_subnet"
+    Name = "public_subnet"
     Environment = "Production"
   }
 }
@@ -54,7 +54,7 @@ resource "aws_route_table_association" "public_subnet_association" {
 }
 
 resource "aws_db_subnet_group" "db_subnet_group" {
-  name       = "db_subnet_group"
+  name       = "db_public_subnet_group"
   subnet_ids = [aws_subnet.public_subnet.id]
 
   tags = {
@@ -85,5 +85,22 @@ resource "aws_security_group" "rds_sg" {
   tags = {
     Name = "rds_sg"
   }
+}
+
+
+
+resource "aws_db_instance" "rds_instance" {
+  allocated_storage    = 10
+  db_name              = "sourcedb"
+  engine               = "mysql"
+  engine_version       = "8.0"
+  instance_class       = "db.t3.micro"
+  username             = "admin"
+  password             = "password2025"
+  db_subnet_group_name   = aws_db_subnet_group.db_subnet_group.name
+  vpc_security_group_ids = [aws_security_group.rds_sg.id]
+  publicly_accessible    = true 
+  skip_final_snapshot  = true
+
 }
 
