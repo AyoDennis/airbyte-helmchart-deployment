@@ -43,3 +43,8 @@ resource "aws_iam_policy" "airbyte_policy" {
     ]
   })
 }
+
+resource "aws_iam_user_policy_attachment" "policy_attachment" {
+  user       = aws_iam_user.airbyte_user.name
+  policy_arn = aws_iam_policy.airbyte_policy.arn
+}
