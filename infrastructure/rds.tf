@@ -5,7 +5,7 @@ resource "aws_vpc" "rds_vpc" {
   enable_dns_hostnames = true
 
   tags = {
-    Name = "rds_vpc"
+    Name        = "rds_vpc"
     Environment = "Production"
   }
 }
@@ -18,7 +18,7 @@ resource "aws_subnet" "public_subnet" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "public_subnet"
+    Name        = "public_subnet"
     Environment = "Production"
   }
 }
