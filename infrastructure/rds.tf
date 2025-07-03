@@ -24,7 +24,7 @@ resource "aws_subnet" "public_subnet" {
 }
 
 # Create private subnet
-resource "aws_subnet" "public_subnet" {
+resource "aws_subnet" "private_subnet" {
   vpc_id                  = aws_vpc.rds_vpc.id
   cidr_block              = "10.0.2.0/24"
   availability_zone       = "eu-central-1b"
@@ -68,7 +68,7 @@ resource "aws_route_table_association" "public_subnet_association" {
 
 resource "aws_db_subnet_group" "db_subnet_group" {
   name       = "db_public_subnet_group"
-  subnet_ids = [aws_subnet.public_subnet.id]
+  subnet_ids = [aws_subnet.public_subnet.id, aws_subnet.private_subnet.id]
 
   tags = {
     Name = "subnet_group"
