@@ -6,3 +6,7 @@ resource "aws_iam_user" "airbyte_user" {
     environment = "dev"
   }
 }
+
+resource "aws_iam_access_key" "airbyte_credentials" {
+  user = aws_iam_user.airbyte_user.name
+}
