@@ -39,11 +39,68 @@ resource "aws_route_table" "public_route_table" {
 
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.fmcg_igw.id
+    gateway_id = aws_internet_gateway.rds_igw.id
   }
 
   tags = {
     Name = "public_route_table"
   }
+}
+
+# Associate the public subnet with the public route table
+resource "aws_route_table_association" "public_subnet_association" {
+  subnet_id      = aws_subnet.public_subnet.id
+  route_table_id = aws_route_table.public_route_table.id
+}
+
+resource "aws_db_subnet_group" "db_subnet_group" {
+  name       = "db_public_subnet_group"
+  subnet_ids = [aws_subnet.public_subnet.id]
+
+  tags = {
+    Name = "subnet_group"
+  }
+}
+
+
+resource "aws_security_group" "rds_sg" {
+  name        = "rds-sg"
+  description = "Allow access"
+  vpc_id      = aws_vpc.rds_vpc.id
+
+  ingress {
+    from_port   = 3306
+    to_port     = 3306
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "rds_sg"
+  }
+}
+
+
+
+resource "aws_db_instance" "rds_instance" {
+  allocated_storage    = 10
+  db_name              = "sourcedb"
+  engine               = "mysql"
+  engine_version       = "8.0"
+  instance_class       = "db.t3.micro"
+  username             = "admin"
+  password             = "password2025"
+  db_subnet_group_name   = aws_db_subnet_group.db_subnet_group.name
+  vpc_security_group_ids = [aws_security_group.rds_sg.id]
+  publicly_accessible    = true 
+  skip_final_snapshot  = true
+
 }
 
