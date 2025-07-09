@@ -35,9 +35,9 @@ resource "aws_iam_policy" "airbyte_policy" {
         Action = [
           "s3:ListBucket",
           "s3:*Object*",
-        #   "rds:DescribeDBInstances",
-        #   "rds:DescribeDBClusters",
-        #   "rds:ListTagsForResource",
+          #   "rds:DescribeDBInstances",
+          #   "rds:DescribeDBClusters",
+          #   "rds:ListTagsForResource",
           "rds-db:connect"
         ]
         Resource = [
