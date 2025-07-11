@@ -136,3 +136,9 @@ resource "aws_instance" "ec2_instance" {
     Name = "airbyte-server"
   }
 }
+
+
+import {
+  to = aws_key_pair.deployer
+  id = "deployer-key"
+}
