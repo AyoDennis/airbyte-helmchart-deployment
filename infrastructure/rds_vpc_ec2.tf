@@ -134,16 +134,22 @@ data "aws_key_pair" "key_pair" {
 
 
 resource "aws_ebs_volume" "ebs_volume" {
-  availability_zone = "us-west-2a"
+  availability_zone = "eu-central-1a"
   size              = 40
   type              = gp3
 
 }
 
+resource "aws_volume_attachment" "ebs_att" {
+  device_name = "/dev/dpe"
+  volume_id   = aws_ebs_volume.ebs_volume.id
+  instance_id = aws_instance.ec2_instance.id
+}
+
 
 resource "aws_instance" "ec2_instance" {
   ami           = data.aws_ami.amzn-linux-2023-ami.id
-  instance_type = "c6a.2xlarge"
+  instance_type = "t2.2xlarge"
   subnet_id     = aws_subnet.public_subnet_1.id
   key_name = data.aws_key_pair.key_pair.key_name
 
