@@ -126,10 +126,10 @@ resource "aws_db_instance" "rds_instance" {
 }
 
 
-resource "aws_instance" "example" {
+resource "aws_instance" "ec2_instance" {
   ami           = data.aws_ami.amzn-linux-2023-ami.id
   instance_type = "c6a.2xlarge"
-  subnet_id     = aws_subnet.example.id
+  subnet_id     = aws_subnet.public_subnet_1.id
 
 
   tags = {
