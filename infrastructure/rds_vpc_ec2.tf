@@ -143,7 +143,7 @@ resource "aws_ebs_volume" "ebs_volume" {
 
 # EC2 EBS Volume Attachment
 resource "aws_volume_attachment" "ebs_att" {
-  device_name = "/dev/dpe"
+  device_name = "/dev/sdh"
   volume_id   = aws_ebs_volume.ebs_volume.id
   instance_id = aws_instance.ec2_instance.id
 }
