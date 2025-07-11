@@ -137,8 +137,12 @@ resource "aws_instance" "ec2_instance" {
   }
 }
 
+data "aws_key_pair" "example" {
+  key_name           = "test"
+  include_public_key = true
 
-import {
-  to = aws_key_pair.deployer
-  id = "deployer-key"
+  filter {
+    name   = "tag:Component"
+    values = ["web"]
+  }
 }
