@@ -1,18 +1,18 @@
-# Create VPC named "rds_vpc"
-resource "aws_vpc" "rds_vpc" {
+# Create VPC named "airbyte_vpc"
+resource "aws_vpc" "airbyte_vpc" {
   cidr_block           = "10.0.0.0/16"
   enable_dns_support   = true
   enable_dns_hostnames = true
 
   tags = {
-    Name = "rds_vpc"
+    Name = "airbyte_vpc"
     Environment = "Production"
   }
 }
 
 # Create public subnet
 resource "aws_subnet" "public_subnet_1" {
-  vpc_id                  = aws_vpc.rds_vpc.id
+  vpc_id                  = aws_vpc.airbyte_vpc.id
   cidr_block              = "10.0.1.0/24"
   availability_zone       = "eu-central-1a"
   map_public_ip_on_launch = true
@@ -25,7 +25,7 @@ resource "aws_subnet" "public_subnet_1" {
 
 # Create private subnet
 resource "aws_subnet" "public_subnet_2" {
-  vpc_id                  = aws_vpc.rds_vpc.id
+  vpc_id                  = aws_vpc.airbyte_vpc.id
   cidr_block              = "10.0.2.0/24"
   availability_zone       = "eu-central-1b"
   map_public_ip_on_launch = true
@@ -39,16 +39,16 @@ resource "aws_subnet" "public_subnet_2" {
 
 # Create Internet Gateway for public access
 resource "aws_internet_gateway" "rds_igw" {
-  vpc_id = aws_vpc.rds_vpc.id
+  vpc_id = aws_vpc.airbyte_vpc.id
 
   tags = {
-    Name = "rds_igw"
+    Name = "airbyte_igw"
   }
 }
 
 # Route Table for public subnets 
 resource "aws_route_table" "public_route_table" {
-  vpc_id = aws_vpc.rds_vpc.id
+  vpc_id = aws_vpc.airbyte_vpc.id
 
   route {
     cidr_block = "0.0.0.0/0"
@@ -86,7 +86,7 @@ resource "aws_db_subnet_group" "db_subnet_group" {
 resource "aws_security_group" "rds_sg" {
   name        = "rds-sg"
   description = "Allow access"
-  vpc_id      = aws_vpc.rds_vpc.id
+  vpc_id      = aws_vpc.airbyte_vpc.id
 
   ingress {
     from_port   = 5432
@@ -124,6 +124,34 @@ resource "aws_db_instance" "rds_instance" {
   skip_final_snapshot  = true
 
 }
+
+# EC2 Security group
+
+resource "aws_security_group" "ec2_security_group" {
+  name        = "allow_tls"
+  description = "Allow TLS inbound traffic and all outbound traffic"
+  vpc_id      = aws_vpc.airbyte_vpc.id
+
+  tags = {
+    Name = "allow_tls"
+  }
+}
+
+resource "aws_vpc_security_group_ingress_rule" "allow_tls_ipv4" {
+  security_group_id = aws_security_group.ec2_security_group.id
+  cidr_ipv4         = aws_vpc.airbyte_vpc.cidr_block
+  from_port         = 443
+  ip_protocol       = "tcp"
+  to_port           = 443
+}
+
+
+resource "aws_vpc_security_group_egress_rule" "allow_all_traffic_ipv4" {
+  security_group_id = aws_security_group.ec2_security_group.id
+  cidr_ipv4         = "0.0.0.0/0"
+  ip_protocol       = "-1" # semantically equivalent to all ports
+}
+
 
 
 # EC2 Key Pair
