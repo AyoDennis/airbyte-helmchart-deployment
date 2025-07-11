@@ -126,10 +126,26 @@ resource "aws_db_instance" "rds_instance" {
 }
 
 
+data "aws_key_pair" "key_pair" {
+  key_name           = "deji-eu-keypair"
+  include_public_key = true
+
+}
+
+
+resource "aws_ebs_volume" "ebs_volume" {
+  availability_zone = "us-west-2a"
+  size              = 40
+  type              = gp3
+
+}
+
+
 resource "aws_instance" "ec2_instance" {
   ami           = data.aws_ami.amzn-linux-2023-ami.id
   instance_type = "c6a.2xlarge"
   subnet_id     = aws_subnet.public_subnet_1.id
+  key_name = data.aws_key_pair.key_pair.key_name
 
 
   tags = {
@@ -137,12 +153,3 @@ resource "aws_instance" "ec2_instance" {
   }
 }
 
-data "aws_key_pair" "example" {
-  key_name           = "test"
-  include_public_key = true
-
-  filter {
-    name   = "tag:Component"
-    values = ["web"]
-  }
-}
