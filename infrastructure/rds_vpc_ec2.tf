@@ -82,7 +82,7 @@ resource "aws_db_subnet_group" "db_subnet_group" {
   }
 }
 
-
+# RDS security group
 resource "aws_security_group" "rds_sg" {
   name        = "rds-sg"
   description = "Allow access"
@@ -108,7 +108,7 @@ resource "aws_security_group" "rds_sg" {
 }
 
 
-
+# RDS Postgres instance
 resource "aws_db_instance" "rds_instance" {
   allocated_storage    = 20
   identifier           = "airbyte-db"
@@ -126,29 +126,31 @@ resource "aws_db_instance" "rds_instance" {
 }
 
 
+# EC2 Key Pair
 data "aws_key_pair" "key_pair" {
   key_name           = "deji-eu-keypair"
   include_public_key = true
 
 }
 
-
+# EC2 EBS Volume
 resource "aws_ebs_volume" "ebs_volume" {
   availability_zone = "eu-central-1a"
   size              = 40
-  type              = gp3
+  type              = "gp3"
 
 }
 
+# EC2 EBS Volume Attachment
 resource "aws_volume_attachment" "ebs_att" {
   device_name = "/dev/dpe"
   volume_id   = aws_ebs_volume.ebs_volume.id
   instance_id = aws_instance.ec2_instance.id
 }
 
-
+# EC2 Instance
 resource "aws_instance" "ec2_instance" {
-  ami           = data.aws_ami.amzn-linux-2023-ami.id
+  ami           = "ami-0229b8f55e5178b65"
   instance_type = "t2.2xlarge"
   subnet_id     = aws_subnet.public_subnet_1.id
   key_name = data.aws_key_pair.key_pair.key_name
