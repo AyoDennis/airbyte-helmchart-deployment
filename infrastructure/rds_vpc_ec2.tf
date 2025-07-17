@@ -23,7 +23,7 @@ resource "aws_subnet" "public_subnet_1" {
   }
 }
 
-# Create private subnet
+# Create public subnet
 resource "aws_subnet" "public_subnet_2" {
   vpc_id                  = aws_vpc.airbyte_vpc.id
   cidr_block              = "10.0.2.0/24"
