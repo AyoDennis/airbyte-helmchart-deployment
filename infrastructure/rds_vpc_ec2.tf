@@ -126,57 +126,57 @@ resource "aws_db_instance" "rds_instance" {
 
 }
 
-# EC2 Security group
-resource "aws_security_group" "ec2_security_group" {
-  name        = "allow_tls"
-  description = "Allow TLS inbound traffic and all outbound traffic"
-  vpc_id      = aws_vpc.airbyte_vpc.id
+# # EC2 Security group
+# resource "aws_security_group" "ec2_security_group" {
+#   name        = "allow_tls"
+#   description = "Allow TLS inbound traffic and all outbound traffic"
+#   vpc_id      = aws_vpc.airbyte_vpc.id
 
-  tags = {
-    Name = "allow_tls"
-  }
-}
+#   tags = {
+#     Name = "allow_tls"
+#   }
+# }
 
-resource "aws_vpc_security_group_ingress_rule" "allow_tls_ipv4" {
-  security_group_id = aws_security_group.ec2_security_group.id
-  cidr_ipv4         = "0.0.0.0/0" # aws_vpc.airbyte_vpc.cidr_block # Normally, static VPN address should be here
-  from_port         = 22
-  ip_protocol       = "tcp"
-  to_port           = 22
-}
-
-
-resource "aws_vpc_security_group_egress_rule" "allow_all_traffic_ipv4" {
-  security_group_id = aws_security_group.ec2_security_group.id
-  cidr_ipv4         = "0.0.0.0/0"
-  ip_protocol       = "-1" # semantically equivalent to all ports
-}
+# resource "aws_vpc_security_group_ingress_rule" "allow_tls_ipv4" {
+#   security_group_id = aws_security_group.ec2_security_group.id
+#   cidr_ipv4         = "0.0.0.0/0" # aws_vpc.airbyte_vpc.cidr_block # Normally, static VPN address should be here
+#   from_port         = 22
+#   ip_protocol       = "tcp"
+#   to_port           = 22
+# }
 
 
-
-# EC2 Key Pair
-data "aws_key_pair" "key_pair" {
-  key_name           = "deji-eu-keypair"
-  include_public_key = true
-
-}
+# resource "aws_vpc_security_group_egress_rule" "allow_all_traffic_ipv4" {
+#   security_group_id = aws_security_group.ec2_security_group.id
+#   cidr_ipv4         = "0.0.0.0/0"
+#   ip_protocol       = "-1" # semantically equivalent to all ports
+# }
 
 
-# EC2 Instance.
-resource "aws_instance" "ec2_instance" {
-  ami           = "ami-0229b8f55e5178b65"
-  instance_type = "t2.2xlarge"
-  subnet_id     = aws_subnet.public_subnet_1.id
-  key_name = data.aws_key_pair.key_pair.key_name
-  vpc_security_group_ids = [aws_security_group.ec2_security_group.id] 
 
- root_block_device {
-    volume_size = 60 
-    volume_type = "gp3" 
-  }
+# # EC2 Key Pair
+# data "aws_key_pair" "key_pair" {
+#   key_name           = "deji-eu-keypair"
+#   include_public_key = true
 
-  tags = {
-    Name = "airbyte-server"
-  }
-}
+# }
+
+
+# # EC2 Instance.
+# resource "aws_instance" "ec2_instance" {
+#   ami           = "ami-0229b8f55e5178b65"
+#   instance_type = "t2.2xlarge"
+#   subnet_id     = aws_subnet.public_subnet_1.id
+#   key_name = data.aws_key_pair.key_pair.key_name
+#   vpc_security_group_ids = [aws_security_group.ec2_security_group.id] 
+
+#  root_block_device {
+#     volume_size = 60 
+#     volume_type = "gp3" 
+#   }
+
+#   tags = {
+#     Name = "airbyte-server"
+#   }
+# }
 

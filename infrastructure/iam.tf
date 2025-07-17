@@ -35,10 +35,13 @@ resource "aws_iam_policy" "airbyte_policy" {
         Action = [
           "s3:ListBucket",
           "s3:*Object*",
-          "rds-db:connect"
+          "rds-db:connect",
+          "secretsmanager:GetSecretValue",
+          "secretsmanager:DescribeSecret"
         ]
         Resource = [
           "arn:aws:s3:::airbyte-project-test*",
+          "arn:aws:secretsmanager:eu-central-1:340752803932:secret:airbyte_eso-CxgTo1"
         ]
       },
     ]
