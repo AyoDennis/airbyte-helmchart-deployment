@@ -10,7 +10,7 @@ resource "aws_vpc" "airbyte_vpc" {
   }
 }
 
-# Create public subnet
+# Create public subnet 1
 resource "aws_subnet" "public_subnet_1" {
   vpc_id                  = aws_vpc.airbyte_vpc.id
   cidr_block              = "10.0.1.0/24"
@@ -23,7 +23,7 @@ resource "aws_subnet" "public_subnet_1" {
   }
 }
 
-# Create public subnet
+# Create public subnet 2
 resource "aws_subnet" "public_subnet_2" {
   vpc_id                  = aws_vpc.airbyte_vpc.id
   cidr_block              = "10.0.2.0/24"
@@ -108,23 +108,40 @@ resource "aws_security_group" "rds_sg" {
   }
 }
 
+# Secrets credentials
+data "aws_secretsmanager_secret" "eso_secret" {
+  name = "airbyte_eso" 
+}
+
+# To retrieve the secret's value
+data "aws_secretsmanager_secret_version" "eso_secret" {
+  secret_id = data.aws_secretsmanager_secret.eso_secret.id
+}
+
+# Parsing the secret, so it's available locally (assuming it's JSON formatted)
+locals {
+  db_credentials = jsondecode(data.aws_secretsmanager_secret_version.eso_secret.secret_string)
+}
+
 
 # RDS Postgres instance
 resource "aws_db_instance" "rds_instance" {
   allocated_storage    = 20
   identifier           = "airbyte-db"
-  db_name              = "airbyte"
+  db_name              = local.db_credentials.DATABASE_NAME
   engine               = "postgres"
   engine_version       = "15"
   instance_class       = "db.t3.micro"
-  username             = "airadmin"
-  password             = "password2025"
+  username             = local.db_credentials.DATABASE_USERNAME    # "airadmin"
+  password             = local.db_credentials.DATABASE_PASSWORD
   db_subnet_group_name   = aws_db_subnet_group.db_subnet_group.name
   vpc_security_group_ids = [aws_security_group.rds_sg.id]
   publicly_accessible    = true 
   skip_final_snapshot  = true
 
 }
+
+# -----
 
 # # EC2 Security group
 # resource "aws_security_group" "ec2_security_group" {

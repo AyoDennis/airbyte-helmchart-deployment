@@ -69,46 +69,48 @@ global:
 
   # -- Database configuration
   database:
-    type: "internal" # "external"
+    type: "external" # "external"
 
     # -- Secret name where database credentials are stored
-    secretName: "" # e.g. "airbyte-config-secrets"
+    secretName: "airbyte-config-secrets" # e.g. "airbyte-config-secrets"
 
     # -- The database host
-    host: ""
+    host: "airbyte-db.c9cw44wwgjak.eu-central-1.rds.amazonaws.com"
 
     # -- The database port
-    port: ""
+    port: "5432"
 
     # -- The database name
-    database: ""
+    database: "airbyte"
 
     # -- The database user
-    user: ""
+    # user: "airadmin"
     # -- The key within `secretName` where the user is stored
     #userSecretKey: "" # e.g. "database-user"
+    userSecretKey: "database-user"
 
     # -- The database password
-    password: ""
+    # password: "password2025"
     # -- The key within `secretName` where the password is stored
     #passwordSecretKey: "" # e.g."database-password"
+    passwordSecretKey: "database-password"
 
 
 
   storage:
     # -- The storage backend type. Supports s3, gcs, azure, minio (default)
-    type: minio # default storage used
+    type: "S3" # minio # default storage used
     # -- Secret name where storage provider credentials are stored
-    #storageSecretName: "airbyte-config-secrets"
+    storageSecretName: "airbyte-config-secrets"
 
     # S3
-    #bucket: ## S3 bucket names that you've created. We recommend storing the following all in one bucket.
-    #  log: airbyte-bucket
-    #  state: airbyte-bucket
-    #  workloadOutput: airbyte-bucket
-    #s3:
-    #  region: "" ## e.g. us-east-1
-    #  authenticationType: credentials ## Use "credentials" or "instanceProfile"
+    bucket: ## S3 bucket names that you've created. We recommend storing the following all in one bucket.
+     log: airbyte-project-test
+     state: airbyte-project-test
+     workloadOutput: airbyte-project-test
+    s3:
+     region: "eu-central-1" ## e.g. us-east-1
+     authenticationType: credentials ## Use "credentials" or "instanceProfile"
 
     # GCS
     #bucket: ## GCS bucket names that you've created. We recommend storing the following all in one bucket.
@@ -1555,7 +1557,7 @@ temporal-ui:
 # PostgreSQL chart configuration, see https://github.com/bitnami/charts/blob/master/bitnami/postgresql/values.yaml
 postgresql:
   # -- Switch to enable or disable the PostgreSQL helm chart
-  enabled: true
+  enabled: false #Changed to false
 
   ## image.repository Repository for airbyte-db statefulset
   image:

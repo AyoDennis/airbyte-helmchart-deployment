@@ -1,2 +1,4 @@
 .env
 .terraform*
+secrets.yaml
+*deji*
