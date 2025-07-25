@@ -84,15 +84,15 @@ global:
     database: "airbyte"
 
     # -- The database user
-    # user: "airadmin"
+    # user: 
     # -- The key within `secretName` where the user is stored
     #userSecretKey: "" # e.g. "database-user"
     userSecretKey: "database-user"
 
     # -- The database password
-    # password: "password2025"
+    # password: 
     # -- The key within `secretName` where the password is stored
-    #passwordSecretKey: "" # e.g."database-password"
+    #passwordSecretKey: "" # e.g."database-password"        passwordsecretKey: "DATABASE_PASSWORD"
     passwordSecretKey: "database-password"
 
 
