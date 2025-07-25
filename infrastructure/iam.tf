@@ -35,6 +35,7 @@ resource "aws_iam_policy" "airbyte_policy" {
         Action = [
           "s3:ListBucket",
           "s3:*Object*",
+          "ecr-public:*",
           "rds-db:connect",
           "secretsmanager:GetSecretValue",
           "secretsmanager:DescribeSecret"
