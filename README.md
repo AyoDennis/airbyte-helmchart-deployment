@@ -88,3 +88,13 @@ cp pki/private/server.key ~/custom_folder/
 cp pki/issued/client1.domain.tld.crt ~/custom_folder 
 cp pki/private/client1.domain.tld.key ~/custom_folder/
 ```
+
+#### Create AWS Secrets
+Create a secret in AWS Secrets Manager named `airbyte_eso` with your database credentials:
+```json
+{
+  "database": "airbyte_db",
+  "database-user": "airbyte_user",
+  "database-password": "your_secure_password"
+}
+```
