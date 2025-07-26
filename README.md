@@ -200,3 +200,28 @@ spec:
 ```bash
 kubectl apply -f secrets_store.yaml
 ```
+
+#### Apply ExternalSecret Configuration
+```yaml
+# external_secrets.yaml
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: airbyte-external-secret
+spec:
+  refreshInterval: 1m
+  secretStoreRef:
+    name: airbyte-secret-store
+    kind: SecretStore
+  target:
+    name: airbyte-config-secrets
+    creationPolicy: Owner
+  dataFrom:
+  - extract:
+      key: airbyte_eso
+```
+
+```bash
+kubectl apply -f external_secrets.yaml
+```
+
