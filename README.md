@@ -267,3 +267,8 @@ externalDatabase:
   existingSecretUsernameKey: "database-user"
 ```
 
+#### Deploy Airbyte
+```bash
+helm install prod . --timeout 10m
+```
+
