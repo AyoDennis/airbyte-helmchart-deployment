@@ -361,3 +361,12 @@ Connect to your RDS instance using a SQL client like DBeaver to monitor Airbyte 
 4. **Scalability**: Kubernetes-based deployment
 5. **Monitoring**: Comprehensive logging and monitoring setup
 
+## More Production Considerations
+
+- Replace Minikube with EKS or other managed Kubernetes service
+- Implement proper backup strategies for RDS
+- Set up monitoring and alerting (Prometheus, Grafana)
+- Configure resource limits and requests
+- Implement CI/CD pipeline for deployments
+- Use private subnets for database and application tiers
+
