@@ -98,3 +98,12 @@ Create a secret in AWS Secrets Manager named `airbyte_eso` with your database cr
   "database-password": "your_secure_password"
 }
 ```
+
+#### Deploy Infrastructure
+```bash
+cd infrastructure
+terraform init
+terraform plan
+terraform apply
+```
+
