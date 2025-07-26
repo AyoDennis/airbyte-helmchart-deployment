@@ -319,3 +319,36 @@ Connect to your RDS instance using a SQL client like DBeaver to monitor Airbyte 
 - **Least Privilege**: IAM policies follow principle of least privilege
 - **Network Isolation**: Resources isolated within VPC
 
+## Configuration Files
+
+### Key Configuration Files Structure
+```
+├── airbyte/
+│    └── charts
+│    ├── templates
+│    ├── tests
+│    ├── .helmignore
+│    ├── airbyte-pro-values.yaml
+│    ├── Chart.lock
+│    ├── Chart.yaml
+│    ├── Chart.yaml.local
+│    ├── Chart.yaml.test
+│    ├── README.md
+│    ├── values.yaml
+│    ├── values.yaml.test
+│   
+├── infrastructure/
+│   ├── provider.tf
+│   ├── backend.tf
+│   ├── main.tf
+│   └── certificates/
+│        ├── ca.crt
+│        ├── server.crt
+│        ├── server.key
+│        ├── client1.domain.tld.crt
+│        └── client1.domain.tld.key
+│       
+└── kubernetes/
+    ├── secrets_store.yaml
+    └── external_secrets.yaml
+```
