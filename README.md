@@ -156,3 +156,15 @@ chmod 700 get_helm.sh
 curl -sS https://webinstall.dev/k9s | bash
 ```
 
+### 3. External Secrets Operator Setup
+
+#### Install ESO
+```bash
+helm repo add external-secrets https://charts.external-secrets.io
+helm install external-secrets \
+   external-secrets/external-secrets \
+    -n external-secrets \
+    --create-namespace \
+    --set installCRDs=true
+```
+
