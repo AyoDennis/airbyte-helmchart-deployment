@@ -280,3 +280,12 @@ wget https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz
 sudo tar xvzf ./ngrok-v3-stable-linux-amd64.tgz -C /usr/local/bin
 ngrok authtoken YOUR_NGROK_AUTHTOKEN
 ```
+
+#### Port Forward and Tunnel
+```bash
+# Port forward Airbyte webapp
+kubectl port-forward svc/prod-airbyte-webapp-svc 5000:80
+
+# In another terminal, create ngrok tunnel
+ngrok http 5000
+```
