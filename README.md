@@ -370,3 +370,10 @@ Connect to your RDS instance using a SQL client like DBeaver to monitor Airbyte 
 - Implement CI/CD pipeline for deployments
 - Use private subnets for database and application tiers
 
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
+
