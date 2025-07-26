@@ -31,3 +31,10 @@ This project demonstrates how to move from a basic Docker-Compose Airbyte deploy
 - **Airbyte** - Open-source data integration platform
 - **Ngrok** - External access tunneling
 
+## 📋 Prerequisites
+
+- AWS Account with appropriate permissions
+- AWS CLI configured with your credentials
+- Terraform installed locally
+- Basic understanding of Kubernetes and Docker
+
