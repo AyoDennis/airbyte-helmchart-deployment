@@ -239,3 +239,17 @@ helm pull --untar airbyte/airbyte
 cd airbyte
 ```
 
+#### Update values.yaml
+Configure external database and S3 storage in `values.yaml`:
+
+```yaml
+storage:
+  type: "S3"
+  storageSecretName: "airbyte-config-secrets"
+  bucket:
+    log: your-airbyte-project-bucket
+    state: your-airbyte-project-bucket
+    workloadOutput: your-airbyte-project-bucket
+  s3:
+    region: "eu-central-1"
+    authenticationType: credentials
