@@ -38,3 +38,26 @@ This project demonstrates how to move from a basic Docker-Compose Airbyte deploy
 - Terraform installed locally
 - Basic understanding of Kubernetes and Docker
 
+## Setup Instructions
+
+### 1. Infrastructure Provisioning
+
+#### Clone and Setup
+```bash
+git clone <your-repository-url>
+cd airbyte-k8s-deployment
+```
+
+#### Configure Terraform Backend
+Update `backend.tf` with your S3 bucket details:
+```hcl
+terraform {
+  backend "s3" {
+    bucket       = "your-airbyte-project-bucket"
+    key          = "key/terraform.tfstate"
+    use_lockfile = true
+    region       = "eu-central-1"
+    profile      = "default"
+  }
+}
+```
