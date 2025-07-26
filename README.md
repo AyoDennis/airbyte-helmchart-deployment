@@ -377,3 +377,13 @@ Connect to your RDS instance using a SQL client like DBeaver to monitor Airbyte 
 3. Make your changes
 4. Submit a pull request
 
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Support
+
+For questions and support, please open an issue in the repository or connect on LinkedIn.
+
+
+**Note**: This setup is designed for demonstration and learning purposes. For production deployments, additional security hardening, monitoring, and high availability configurations should be implemented.
