@@ -168,3 +168,10 @@ helm install external-secrets \
     --set installCRDs=true
 ```
 
+#### Create AWS Credentials Secret
+```bash
+kubectl create secret generic aws-airbyte-credentials \
+  --from-literal=access_key=YOUR_ACCESS_KEY \
+  --from-literal=secret_access_key=YOUR_SECRET_KEY
+```
+
