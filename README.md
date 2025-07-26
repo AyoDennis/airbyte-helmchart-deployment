@@ -130,3 +130,10 @@ sudo usermod -a -G docker ec2-user
 sudo systemctl enable docker
 ```
 
+#### Install Minikube
+```bash
+curl -LO https://github.com/kubernetes/minikube/releases/latest/download/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube && rm minikube-linux-amd64
+minikube start --cpus=6 --memory=8192 --disk-size=40g
+```
+
