@@ -253,3 +253,17 @@ storage:
   s3:
     region: "eu-central-1"
     authenticationType: credentials
+
+# Configure external database
+postgresql:
+  enabled: false
+
+externalDatabase:
+  host: "your-rds-endpoint"
+  port: 5432
+  database: "airbyte_db"
+  existingSecret: "airbyte-config-secrets"
+  existingSecretPasswordKey: "database-password"
+  existingSecretUsernameKey: "database-user"
+```
+
