@@ -297,3 +297,13 @@ ngrok http 5000
 kubectl get pods
 kubectl get services
 ```
+
+### Monitor with K9s
+```bash
+k9s
+```
+
+### View Logs
+```bash
+kubectl logs -f deployment/prod-airbyte-server
+```
