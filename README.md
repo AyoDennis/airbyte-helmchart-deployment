@@ -19,3 +19,12 @@ This project demonstrates how to move from a basic Docker-Compose Airbyte deploy
 - **AWS RDS** - External PostgreSQL database for metadata
 - **Amazon EC2** - Virtual machine hosting Minikube
 
+### Kubernetes Stack
+- **Docker** - Container runtime
+- **Minikube** - Local Kubernetes environment
+- **K9s** - Cluster monitoring and visualization
+- **Kubectl** - Kubernetes command-line tool
+- **Helm** - Kubernetes package manager
+- **External Secrets Operator (ESO)** - Advanced secrets management
+
+#
