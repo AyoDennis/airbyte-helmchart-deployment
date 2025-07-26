@@ -61,3 +61,16 @@ terraform {
   }
 }
 ```
+
+#### Generate VPN Certificates
+```bash
+# Clone OpenVPN easy-rsa
+git clone https://github.com/OpenVPN/easy-rsa.git
+cd easy-rsa/easyrsa3
+
+# Initialize PKI
+./easyrsa init-pki
+
+# Build CA
+./easyrsa build-ca nopass
+
