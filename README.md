@@ -9,7 +9,9 @@ This project demonstrates how to move from a basic Docker-Compose Airbyte deploy
 > **Note**: This setup uses Minikube for demonstration purposes. For actual production deployments, consider using Amazon EKS or other managed Kubernetes services.
 
 ## Architecture Components
+<img width="1239" height="614" alt="Airbyte Architecture" src="https://github.com/user-attachments/assets/3699b4b9-7174-4e2c-a92c-bab4abbda798" />
 
+[Airbyte Deployment Architecture](https://github.com/AyoDennis/airbyte-helmchart-deployment/blob/main/Airbyte%20Architecture.png?raw=true)
 ### Infrastructure & Tools
 - **Terraform** - Infrastructure as Code for resource provisioning
 - **AWS S3** - External logging and Terraform statefile locking
