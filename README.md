@@ -352,3 +352,12 @@ Connect to your RDS instance using a SQL client like DBeaver to monitor Airbyte 
     ├── secrets_store.yaml
     └── external_secrets.yaml
 ```
+
+## Benefits
+
+1. **Cost Efficiency**: Self-hosted solution reduces ELT costs
+2. **High Availability**: External database and storage
+3. **Security**: VPN access, secrets management, network isolation
+4. **Scalability**: Kubernetes-based deployment
+5. **Monitoring**: Comprehensive logging and monitoring setup
+
