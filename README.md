@@ -27,4 +27,7 @@ This project demonstrates how to move from a basic Docker-Compose Airbyte deploy
 - **Helm** - Kubernetes package manager
 - **External Secrets Operator (ESO)** - Advanced secrets management
 
-#
+### Application
+- **Airbyte** - Open-source data integration platform
+- **Ngrok** - External access tunneling
+
