@@ -225,3 +225,12 @@ spec:
 kubectl apply -f external_secrets.yaml
 ```
 
+### 4. Airbyte Deployment
+
+#### Add Airbyte Helm Repository
+```bash
+helm repo add airbyte https://airbytehq.github.io/helm-charts
+helm repo update
+```
+
+#
