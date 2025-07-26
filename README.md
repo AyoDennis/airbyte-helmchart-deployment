@@ -119,3 +119,14 @@ terraform apply
 chmod 400 your-keypair.pem
 ssh -i your-keypair.pem ec2-user@<private-ip>
 ```
+
+#### Install Docker
+```bash
+sudo yum update -y
+sudo yum install docker
+sudo service docker start
+sudo usermod -a -G docker ec2-user
+# Reboot instance
+sudo systemctl enable docker
+```
+
