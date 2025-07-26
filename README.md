@@ -9,6 +9,10 @@ This project demonstrates how to move from a basic Docker-Compose Airbyte deploy
 > **Note**: This setup uses Minikube for demonstration purposes. For actual production deployments, consider using Amazon EKS or other managed Kubernetes services.
 
 ## Architecture Components
+<br>
+
+![alt text](<Airbyte Architecture.png>)
+
 
 ### Infrastructure & Tools
 - **Terraform** - Infrastructure as Code for resource provisioning
