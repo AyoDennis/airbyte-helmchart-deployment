@@ -74,3 +74,17 @@ cd easy-rsa/easyrsa3
 # Build CA
 ./easyrsa build-ca nopass
 
+# Generate server certificate
+./easyrsa --san=DNS:server build-server-full server nopass
+
+# Generate client certificate
+./easyrsa build-client-full client1.domain.tld nopass
+
+# Copy certificates to project
+mkdir ~/custom_folder/
+cp pki/ca.crt ~/custom_folder/ 
+cp pki/issued/server.crt ~/custom_folder/ 
+cp pki/private/server.key ~/custom_folder/ 
+cp pki/issued/client1.domain.tld.crt ~/custom_folder 
+cp pki/private/client1.domain.tld.key ~/custom_folder/
+```
