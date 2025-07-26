@@ -311,3 +311,11 @@ kubectl logs -f deployment/prod-airbyte-server
 ### Database Connection
 Connect to your RDS instance using a SQL client like DBeaver to monitor Airbyte metadata.
 
+## Security Considerations
+
+- **VPN Access**: All resources are accessible only through VPN
+- **Private Database**: RDS instance is not publicly accessible
+- **Secrets Management**: Credentials stored in AWS Secrets Manager
+- **Least Privilege**: IAM policies follow principle of least privilege
+- **Network Isolation**: Resources isolated within VPC
+
