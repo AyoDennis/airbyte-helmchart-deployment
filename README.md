@@ -107,3 +107,15 @@ terraform plan
 terraform apply
 ```
 
+### 2. EC2 Instance Setup
+
+#### Connect via VPN
+1. Download the VPN configuration from AWS Console
+2. Install AWS VPN Client
+3. Connect using the downloaded `.ovpn` file
+
+#### SSH to EC2 Instance
+```bash
+chmod 400 your-keypair.pem
+ssh -i your-keypair.pem ec2-user@<private-ip>
+```
