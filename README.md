@@ -175,3 +175,28 @@ kubectl create secret generic aws-airbyte-credentials \
   --from-literal=secret_access_key=YOUR_SECRET_KEY
 ```
 
+#### Apply SecretStore Configuration
+```yaml
+# secrets_store.yaml
+apiVersion: external-secrets.io/v1
+kind: SecretStore
+metadata:
+  name: airbyte-secret-store
+spec:
+  provider: 
+    aws:
+      service: SecretsManager
+      region: eu-central-1 
+      auth:
+        secretRef:
+          accessKeyIDSecretRef:
+            name: aws-airbyte-credentials
+            key: access_key
+          secretAccessKeySecretRef: 
+            name: aws-airbyte-credentials
+            key: secret_access_key
+```
+
+```bash
+kubectl apply -f secrets_store.yaml
+```
