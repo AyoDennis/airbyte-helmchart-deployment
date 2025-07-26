@@ -307,3 +307,7 @@ k9s
 ```bash
 kubectl logs -f deployment/prod-airbyte-server
 ```
+
+### Database Connection
+Connect to your RDS instance using a SQL client like DBeaver to monitor Airbyte metadata.
+
