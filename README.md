@@ -289,3 +289,11 @@ kubectl port-forward svc/prod-airbyte-webapp-svc 5000:80
 # In another terminal, create ngrok tunnel
 ngrok http 5000
 ```
+
+## 🔍 Monitoring and Troubleshooting
+
+### Check Pod Status
+```bash
+kubectl get pods
+kubectl get services
+```
