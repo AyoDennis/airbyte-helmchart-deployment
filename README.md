@@ -11,7 +11,7 @@ This project demonstrates how to move from a basic Docker-Compose Airbyte deploy
 ## Architecture Components
 <br>
 
-![alt text](<Airbyte Architecture.png>)
+![Airbyte Kubernetes Deployment](<Airbyte Kubernetes Platform.png>)
 
 
 ### Infrastructure & Tools
