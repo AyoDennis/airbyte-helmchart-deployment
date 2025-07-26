@@ -233,4 +233,9 @@ helm repo add airbyte https://airbytehq.github.io/helm-charts
 helm repo update
 ```
 
-#
+#### Pull and Configure Airbyte Chart
+```bash
+helm pull --untar airbyte/airbyte
+cd airbyte
+```
+
